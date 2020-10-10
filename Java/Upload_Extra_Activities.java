@@ -132,7 +132,7 @@ public class Upload_Extra_Activities extends AppCompatActivity implements View.O
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            //displaying the upload progress
+                            
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
                         }
