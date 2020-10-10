@@ -38,6 +38,7 @@ public class pop_up_cse_sem1_sub1 extends AppCompatActivity implements View.OnCl
     TextView textViewStatus;
     EditText description;
     ProgressBar progressBar;
+    Button mbutton;
 
 
     StorageReference mStorageReference;
@@ -64,9 +65,16 @@ public class pop_up_cse_sem1_sub1 extends AppCompatActivity implements View.OnCl
         textViewStatus = (TextView) findViewById(R.id.textViewStatus);
         description=(EditText)findViewById(R.id.description);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        mbutton=(Button) findViewById(R.id.button2);
 
 
         findViewById(R.id.buttonUploadFile).setOnClickListener(this);
+         mbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Csesem1sub1.class));
+            }
+        });
     }
 
 
@@ -116,6 +124,12 @@ public class pop_up_cse_sem1_sub1 extends AppCompatActivity implements View.OnCl
                         task.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
+                                
+                                progressBar.setVisibility(View.GONE);
+                                textViewStatus.setText("File Uploaded Successfully");
+                                String newUri=uri.toString();
+                                Uploads uploads=new Uploads(description.getText().toString(),newUri);
+                                mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(uploads);
 
                             }
                         });
@@ -126,6 +140,7 @@ public class pop_up_cse_sem1_sub1 extends AppCompatActivity implements View.OnCl
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
                         
                     }
                 })
@@ -133,6 +148,8 @@ public class pop_up_cse_sem1_sub1 extends AppCompatActivity implements View.OnCl
                     @SuppressWarnings("VisibleForTests")
                     @Override
                     public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                        textViewStatus.setText((int) progress + "% Uploading...");
 
                     }
                 });
