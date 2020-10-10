@@ -38,6 +38,8 @@ public class Cse_layout extends AppCompatActivity {
         extra_activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                
+                 startActivity(new Intent(Cse_layout.this,Extra_activities.class));
 
 
             }
@@ -46,6 +48,8 @@ public class Cse_layout extends AppCompatActivity {
         internship.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                
+                startActivity(new Intent(Cse_layout.this,Internships.class));
 
 
             }
@@ -54,6 +58,8 @@ public class Cse_layout extends AppCompatActivity {
         course.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                
+                 startActivity(new Intent(Cse_layout.this,Courses.class));
 
 
             }
@@ -81,6 +87,9 @@ public class Cse_layout extends AppCompatActivity {
 
         }
         if(id==R.id.chatbot){
+            
+            Intent b = new Intent(Intent.ACTION_VIEW, Uri.parse("https://web-chat.global.assistant.watson.cloud.ibm.com/preview.html?region=eu-gb&integrationID=6fca1f90-dcf7-4da0-ab01-cee80554056e&serviceInstanceID=faf5e2da-0250-446a-8ac6-31e40d6d49a6"));
+            startActivity(b);
 
         }
 
